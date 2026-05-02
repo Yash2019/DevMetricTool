@@ -7,7 +7,7 @@ SettingsConfigDict -> What to load
 
 class Settings(BaseSettings):
     DATABASE_URL: str
-
+    SECRET: str
 
     model_config = SettingsConfigDict(
         env_file='.env',
