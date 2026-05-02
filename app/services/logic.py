@@ -20,7 +20,12 @@ def verify_signature(raw_data: bytes, secret: str, signature_header: str):
 async def receive_json(request: Request, db: AsyncSession):
 
     raw_body = await request.body()  # read the raw bytes
+
+    if not raw_body:
+        raise HTTPException(status_code=400, detail="Empty body")
+    
     payload = json.loads(raw_body)  #parse the raw byte to json 
+    
     signature = request.headers.get("X-Hub-Signature-256")
 
     if not signature:
